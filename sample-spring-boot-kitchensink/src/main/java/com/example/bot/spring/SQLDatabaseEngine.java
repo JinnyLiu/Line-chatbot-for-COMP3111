@@ -12,6 +12,23 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 	@Override
 	String search(String text) throws Exception {
 		//Write your code here
+		try {
+			String username = "postgres";
+			String password = "comp3111";
+			String dbUrl = "jdbc:postgresql://localhost:5432/ChatbotDB";
+			Connection connection = getConnection();
+			PreparedStatement stmt = connection.prepareStatement(
+					"SELECT response FROM responses WHERE keyword = " + text);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
+			}
+			rs.close();
+			stmt.close();
+			connection.close();
+		} catch (Exception e) {
+			throw new Exception("NOT FOUND");
+		}
 		return null;
 	}
 	
