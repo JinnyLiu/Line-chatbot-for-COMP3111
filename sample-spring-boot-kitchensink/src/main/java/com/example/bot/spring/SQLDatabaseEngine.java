@@ -20,7 +20,7 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 
 			Connection connection = getConnection();
 			PreparedStatement stmt = connection.prepareStatement(
-					"SELECT response FROM responses WHERE keyword = " + text);
+					"SELECT response FROM responses WHERE keyword = '" + text + "'");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				System.out.println(rs.getString(1));
